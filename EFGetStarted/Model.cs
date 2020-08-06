@@ -83,6 +83,21 @@ public class UslugiClinica
     public VetUslugiAnimals VetUslugiAnimals { get; set; }
     
 }
+public class Person         ///  _____________________________________ Клиники_______________________________________________________ 
+{
+    public int Id { get; set; }
+    public string Name { get; set; }
+    public string Surname { get; set; }
+    public System.DateTime Date { get; set; }
+    public string password {get; set;}
+    /*public List<DoctorInClinica> DoctorInClinicas { get; set; } // связь Клиники и Докторов
+    public List<UslugiClinica> UslugiClinicas { get; set; } // связь Клиники и оказываемых услуг
+    public VetClinica()
+    {
+        DoctorInClinicas = new List<DoctorInClinica>();
+        UslugiClinicas = new List<UslugiClinica>();        
+    }*/
+}
 
     public class veterinar : DbContext
     {
