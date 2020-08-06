@@ -111,7 +111,7 @@ public class UslugiClinica
             .HasKey(t => new { t.VetDoctorId, t.VetUslugiAnimalsId });
  
         modelBuilder.Entity<UslugiDoctor>()
-            .HasOne(sc => sc.VetUslugiAnimals)
+            .HasOne(sc => sc.VetUslugiAnimalsssss)
             .WithMany(s => s.UslugiDoctors)
             .HasForeignKey(sc => sc.VetUslugiAnimalsId);
  
