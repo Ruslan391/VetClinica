@@ -83,7 +83,7 @@ public class UslugiClinica
     public VetUslugiAnimals VetUslugiAnimals { get; set; }
     
 }
-public class Person         ///  _____________________________________ Клиники_______________________________________________________ 
+public class Person         ///  _____________________________________ Клиенты_______________________________________________________ 
 {
     public int Id { get; set; }
     public string Name { get; set; }
