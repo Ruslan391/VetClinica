@@ -11,8 +11,9 @@ namespace EFGetStarted
         {
             using (veterinar db = new veterinar())
             {       
-             Console.Write("Добавить клинику? Y/N:  ");
-             if (Console.ReadLine()=="Y")
+             Console.WriteLine("Добавить: 1 - клинику, 2 - доктора, 3 - ветуслуга ");
+             string q = Console.ReadLine();
+             if (q == "1")
                  {
                     string title1, address1;
                     int phnumber1=0;
@@ -66,6 +67,77 @@ namespace EFGetStarted
                         }
 
                  }
+            else if (q == "2")
+                {
+                   string FIODoctor, DescriptionDoctor;
+                    int AgeDoctor=0, StagDoctor=0;
+                    Console.Write("ФИО:   ");
+                    FIODoctor=Console.ReadLine();
+                    Console.Write("Описание:   ");
+                    DescriptionDoctor=Console.ReadLine();
+                    int i = 2;
+                    do
+                        {
+                    try
+                      {
+                        Console.Write("Возраст:   ");
+                        AgeDoctor=Convert.ToInt32(Console.ReadLine());
+                        if (AgeDoctor<100) {i=0;}
+                      }
+                    catch (Exception ex)
+                      {
+                          i = 1;
+                          Console.WriteLine($"Возникло исключение: {ex.Message}");
+
+                      } 
+                        }
+                    while (i == 1);
+
+                    i = 1;
+                    while (i==1)
+                        {
+                    try
+                      {
+                        Console.Write("Стаж:   ");
+                        StagDoctor=Convert.ToInt32(Console.ReadLine());
+                        
+                        if (StagDoctor<AgeDoctor) {i=0;}
+                      }
+                    catch (Exception ex)
+                      {
+                          i = 1;
+                          Console.WriteLine($"Возникло исключение: {ex.Message}");
+
+                      } 
+                        }
+
+                    Console.Write("Сщхранить? Y/N:   ");
+
+                    if (Console.ReadLine()=="Y")
+                    
+                        {
+                        do
+                            {
+                            VetDoctor vetdoctor1 = new VetDoctor {FIO= FIODoctor, Age = AgeDoctor, Stag = StagDoctor, Description = DescriptionDoctor};
+                            try
+                               {
+                                   db.VetDoctor.Add(vetdoctor1);
+                                   db.SaveChanges();
+                               }
+                            catch (Exception ex)
+                               {
+                                   Console.WriteLine($"Возникло исключение: {ex.Message}");
+                                    i = 1;
+                               }
+                            finally 
+                               {
+                                   Console.WriteLine("Доктор добавлен");
+                                   i = 0;
+                               }
+                            }
+                        while (i == 1);     
+                        } 
+                }
 
                }
             //Console.Read();
