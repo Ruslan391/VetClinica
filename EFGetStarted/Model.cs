@@ -9,7 +9,7 @@ namespace EFGetStarted
     public int Id { get; set; }
     public string Title { get; set; }
     public string Address { get; set; }
-    public int PhNamber { get; set; }
+    public long PhNamber { get; set; }
     public List<DoctorInClinica> DoctorInClinicas { get; set; } // связь Клиники и Докторов
     public List<UslugiClinica> UslugiClinicas { get; set; } // связь Клиники и оказываемых услуг
     public VetClinica()
@@ -106,6 +106,8 @@ public class Person         ///  _____________________________________ Клие�
        public DbSet<VetUslugi> VetUslugi { get; set; }
        public DbSet<VetDoctor> VetDoctor { get; set; }
        public DbSet<UslugiClinica> UslugiClinica { get; set; }
+
+   
        protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
 //_______________________________________________________________________________
