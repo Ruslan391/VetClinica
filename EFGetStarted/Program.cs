@@ -176,7 +176,7 @@ namespace EFGetStarted
                                }
                             finally 
                                {
-                                   Console.WriteLine("Вет Услуга добавлена");
+                                   Console.WriteLine("ВетУслуга добавлена");
                                    i = 0;
                                }
                             }
