@@ -10,10 +10,15 @@ namespace EFGetStarted
         public static void Main(string[] args)
         {
             using (veterinar db = new veterinar())
-            {       
-             Console.WriteLine("Добавить: 1 - клинику, 2 - доктора, 3 - ветуслуга ");
+            { 
+             int j = 0;
+             while (j==0)
+             {      
+             Console.WriteLine("Добавить: 1 - клинику, 2 - доктора, 3 - ветуслуга 4 - выйти");
              string q = Console.ReadLine();
-             if (q == "1")
+             switch (q)
+              {
+               case  "1":
                  {
                     string title1, address1;
                     int phnumber1=0;
@@ -65,9 +70,10 @@ namespace EFGetStarted
                             }
                         while (i == 1);     
                         }
+                    break;
 
                  }
-            else if (q == "2")
+            case "2":
                 {
                    string FIODoctor, DescriptionDoctor;
                     int AgeDoctor=0, StagDoctor=0;
@@ -137,10 +143,57 @@ namespace EFGetStarted
                             }
                         while (i == 1);     
                         } 
+                    break;
+                }
+            case "3":
+                {
+                    string titleUslugi, animalsUslugi, descriptionUslugi;
+                    Console.Write("Название услуги:   ");
+                    titleUslugi=Console.ReadLine();
+                    Console.Write("Животное:   ");
+                    animalsUslugi=Console.ReadLine();
+                    Console.Write("Описание услуги:   ");
+                    descriptionUslugi=Console.ReadLine();
+                    
+
+                    Console.Write("Сщхранить? Y/N:   ");
+                    int i=0;
+                    if (Console.ReadLine()=="Y")
+
+                        {
+                        do
+                            {
+                            VetUslugi vetuslugi1 = new VetUslugi {Title= titleUslugi, Animals = animalsUslugi, Description = descriptionUslugi};
+                            try
+                               {
+                                   db.VetUslugi.Add(vetuslugi1);
+                                   db.SaveChanges();
+                               }
+                            catch (Exception ex)
+                               {
+                                   Console.WriteLine($"Возникло исключение: {ex.Message}");
+                                    i = 1;
+                               }
+                            finally 
+                               {
+                                   Console.WriteLine("ВетУслуга добавлена");
+                                   i = 0;
+                               }
+                            }
+                        while (i == 1);     
+                        }
+                    break;
+                }
+            case "4":
+                {
+                    j=1;
+                    break;
                 }
 
                }
+            }
             //Console.Read();
         }
     }
+}
 }

@@ -19,21 +19,17 @@ namespace EFGetStarted
     }
 }
     
-     public class VetUslugi         ///   ВетУслуги 
+    
+
+      public class  VetUslugi         ///   ВетУслуги определённым животным
 {
     public int Id { get; set; }
     public string Title { get; set; }
-   // public string Description { get; set; }
-    
- }
-
-      public class VetUslugiAnimals : VetUslugi         ///   ВетУслуги определённым животным
-{
     public string Animals { get; set; }
     public string Description { get; set; }
     public List<UslugiDoctor> UslugiDoctors { get; set; } // связь с классом Teacher, многие ко многим, список учителей, которые преподают урок   
     public List<UslugiClinica> UslugiClinicas { get; set; } // связь с классом Teacher, многие ко многим, список учителей, которые преподают урок       
-    public VetUslugiAnimals()
+    public VetUslugi()
     {
         UslugiDoctors = new List<UslugiDoctor>();
         UslugiClinicas = new List<UslugiClinica>();                 
@@ -71,7 +67,7 @@ public class UslugiDoctor
     public VetDoctor VetDoctor { get; set; }
  
     public int VetUslugiAnimalsId { get; set; }
-    public VetUslugiAnimals VetUslugiAnimals { get; set; }
+    public VetUslugi VetUslugiAnimals { get; set; }
     
 }
 public class UslugiClinica
@@ -80,7 +76,7 @@ public class UslugiClinica
     public VetClinica VetClinica { get; set; }
  
     public int VetUslugiAnimalsId { get; set; }
-    public VetUslugiAnimals VetUslugiAnimals { get; set; }
+    public VetUslugi VetUslugiAnimals { get; set; }
     
 }
 public class Person         ///  _____________________________________ Клиенты_______________________________________________________ 
@@ -102,7 +98,6 @@ public class Person         ///  _____________________________________ Клие�
     public class veterinar : DbContext
     {
         public DbSet<VetClinica> VetClinica { get; set; }
-       public DbSet<VetUslugiAnimals> VetUslugiAnimals { get; set; }
        public DbSet<VetUslugi> VetUslugi { get; set; }
        public DbSet<VetDoctor> VetDoctor { get; set; }
        public DbSet<UslugiClinica> UslugiClinica { get; set; }
