@@ -9,9 +9,10 @@ namespace EFGetStarted
     {
         public static void Main(string[] args)
         {
+            int i=0, j=0;
             using (veterinar db = new veterinar())
             { 
-             int j = 0;
+             j = 0;
              while (j==0)
              {      
              Console.WriteLine("Добавить: 1 - клинику, 2 - доктора, 3 - ветуслуга 4 - продолжить");
@@ -26,7 +27,7 @@ namespace EFGetStarted
                     title1=Console.ReadLine();
                     Console.Write("Адрес:   ");
                     address1=Console.ReadLine();
-                    int i = 0;
+                    i = 0;
                     do
                         {
                     try
@@ -81,7 +82,7 @@ namespace EFGetStarted
                     FIODoctor=Console.ReadLine();
                     Console.Write("Описание:   ");
                     DescriptionDoctor=Console.ReadLine();
-                    int i = 2;
+                    i = 2;
                     do
                         {
                     try
@@ -157,7 +158,7 @@ namespace EFGetStarted
                     
 
                     Console.Write("Сщхранить? Y/N:   ");
-                    int i=0;
+                    i=0;
                     if (Console.ReadLine()=="Y")
 
                         {
@@ -202,14 +203,52 @@ namespace EFGetStarted
                     {
                         case "1":
                             {
-                                Console.WriteLine("Введите название клиники");
-                                titleVet=Console.ReadLine();
-                                Console.WriteLine("Введите имя доктора");
-                                nameDoc=Console.ReadLine();
-                                var vetclinica1 = db.VetClinica.Where(cs => cs.Title==titleVet).First();
-                                var vetDoc1 = db.VetDoctor.Where(cs => cs.FIO==nameDoc).First();
-                                vetclinica1.DoctorInClinicas.Add(new DoctorInClinica{VetClinicaId=vetclinica1.Id, VetDoctorId=vetDoc1.Id});
-                                db.SaveChanges();
+                                i=0;
+                                while (i==0)
+                                  {
+                                   do
+                                     {                      
+                                       Console.WriteLine("Введите название клиники");
+                                       titleVet=Console.ReadLine();
+                                       if (db.VetClinica.Any(cs => cs.Title==titleVet) == true)
+                                          {
+                                               Console.WriteLine("ok");
+                                               i=0;
+                                          }
+                                       else 
+                                          {
+                                              Console.WriteLine("Клиника отсутствует в базе. Выйти? Y/N");
+                                              if (Console.ReadLine()=="Y") {i=1; break;}
+                                              i=1;
+                                          }
+                                      }
+                                    while (i!=0);
+                                    if (i==1) break;
+                                    var vetclinica1 = db.VetClinica.Where(cs => cs.Title==titleVet).First();
+                                    do
+                                      {
+                                        Console.WriteLine("Введите имя доктора");
+                                        nameDoc=Console.ReadLine();
+                                        if (db.VetDoctor.Any(cs => cs.FIO==nameDoc) == true)
+                                          {
+                                              Console.WriteLine("ok");
+                                              i=0;
+                                          }
+                                        else 
+                                          {
+                                            Console.WriteLine("Доктор отсутствует в базе. Выйти? Y/N");
+                                            if (Console.ReadLine()=="Y") {i=1; break;}
+                                            i=1;
+                                          }
+                                      }
+                                    while (i!=0);
+                                    if (i==1) break;
+                                    var vetDoc1 = db.VetDoctor.Where(cs => cs.FIO==nameDoc).First();
+                                    vetclinica1.DoctorInClinicas.Add(new DoctorInClinica{VetClinicaId=vetclinica1.Id, VetDoctorId=vetDoc1.Id});
+                                    db.SaveChanges();
+                                    Console.WriteLine("Данные добавлены");
+                                    i=1;
+                                  }
                                 break;
                             }
                         case "2":
