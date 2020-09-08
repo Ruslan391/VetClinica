@@ -14,7 +14,7 @@ namespace EFGetStarted
              int j = 0;
              while (j==0)
              {      
-             Console.WriteLine("Добавить: 1 - клинику, 2 - доктора, 3 - ветуслуга 4 - выйти");
+             Console.WriteLine("Добавить: 1 - клинику, 2 - доктора, 3 - ветуслуга 4 - продолжить");
              string q = Console.ReadLine();
              switch (q)
               {
@@ -192,6 +192,41 @@ namespace EFGetStarted
 
                }
             }
+            j = 0;
+            while (j==0)
+                {
+                Console.WriteLine("Действия: Добавить Доктора в клинику - 1, Добавить услугу в клинику - 2, добавить доктору услугу - 3, выход -4");
+                string qq = Console.ReadLine();
+                string titleVet, nameDoc;
+                switch (qq)
+                    {
+                        case "1":
+                            {
+                                Console.WriteLine("Введите название клиники");
+                                titleVet=Console.ReadLine();
+                                Console.WriteLine("Введите имя доктора");
+                                nameDoc=Console.ReadLine();
+                                var vetclinica1 = db.VetClinica.Where(cs => cs.Title==titleVet).First();
+                                var vetDoc1 = db.VetDoctor.Where(cs => cs.FIO==nameDoc).First();
+                                vetclinica1.DoctorInClinicas.Add(new DoctorInClinica{VetClinicaId=vetclinica1.Id, VetDoctorId=vetDoc1.Id});
+                                db.SaveChanges();
+                                break;
+                            }
+                        case "2":
+                            {
+                                break;
+                            }
+                        case "3":
+                            {
+                                break;
+                            }
+                        case "4":
+                            {
+                                j=1;
+                                break;
+                            }
+                    }
+                }
             //Console.Read();
         }
     }
